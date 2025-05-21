@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Inches Converter"
 include(":app")
+include(":app")
  
