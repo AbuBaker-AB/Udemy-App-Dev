@@ -30,9 +30,11 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:src="" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/shawarma" />
 
             <TextView
+                android:layout_gravity="center"
                 android:id="@+id/textView_starters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
