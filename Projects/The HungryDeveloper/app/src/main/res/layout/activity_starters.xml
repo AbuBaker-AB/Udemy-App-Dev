@@ -5,11 +5,9 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:text="Welcome to The Hungry Developer"
-        android:textSize="24sp" />
+    <ListView
+        android:id="@+id/listView_starters"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
 </LinearLayout>
