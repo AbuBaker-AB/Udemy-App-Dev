@@ -1,6 +1,7 @@
 package com.example.thehungrydeveloper;
 
 import android.os.Bundle;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,8 @@ public class StartersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starters);
+
+        ListView starterListView = findViewById(R.id.listView_starters);
 
     }
 }
