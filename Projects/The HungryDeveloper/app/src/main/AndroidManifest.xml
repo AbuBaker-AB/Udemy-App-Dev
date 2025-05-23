@@ -16,7 +16,7 @@
             android:name=".StartersActivity"
             android:label="Starters"
             android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
