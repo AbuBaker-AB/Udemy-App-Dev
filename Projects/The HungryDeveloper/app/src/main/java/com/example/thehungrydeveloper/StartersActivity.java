@@ -44,5 +44,6 @@ public class StartersActivity extends AppCompatActivity {
 
         ArrayAdapter<String> dishesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dishes);
 
+        starterListView.setAdapter(dishesAdapter);
     }
 }
