@@ -18,5 +18,28 @@ public class StartersActivity extends AppCompatActivity {
 
         ListView starterListView = findViewById(R.id.listView_starters);
 
+        String[] dishes = {
+            "Spring Rolls",
+            "Garlic Bread",
+            "Bruschetta",
+            "Stuffed Mushrooms",
+            "Caprese Salad",
+            "Chicken Wings",
+            "Nachos",
+            "Hummus and Pita",
+            "Cheese Platter",
+            "Vegetable Samosas",
+            "Deviled Eggs",
+            "Onion Rings",
+            "Mini Quiches",
+            "Spinach and Artichoke Dip",
+            "Meatballs",
+            "Crispy Calamari",
+            "Potato Skins",
+            "Antipasto Skewers",
+            "Buffalo Cauliflower Bites",
+            "Brussels Sprouts with Bacon",
+        };
+
     }
 }
