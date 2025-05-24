@@ -1,6 +1,7 @@
 package com.example.thehungrydeveloper;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -40,6 +41,8 @@ public class StartersActivity extends AppCompatActivity {
             "Buffalo Cauliflower Bites",
             "Brussels Sprouts with Bacon",
         };
+
+        ArrayAdapter<String> dishesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dishes);
 
     }
 }
