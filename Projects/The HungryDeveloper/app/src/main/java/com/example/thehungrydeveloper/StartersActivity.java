@@ -19,12 +19,17 @@ public class StartersActivity extends AppCompatActivity {
 
         ListView starterListView = findViewById(R.id.listView_starters);
 
+        Dish dish1 = new Dish();
+        dish1.title = "Spring Rolls";
+        dish1.description = "Crispy rolls filled with vegetables and served with sweet chili sauce.";
+        dish1.price = 5;
+
         String[] dishes = {
             "Spring Rolls",
             "Garlic Bread",
-            "Bruschetta",
+            "Brochette",
             "Stuffed Mushrooms",
-            "Caprese Salad",
+            "Caresse Salad",
             "Chicken Wings",
             "Nachos",
             "Hummus and Pita",
