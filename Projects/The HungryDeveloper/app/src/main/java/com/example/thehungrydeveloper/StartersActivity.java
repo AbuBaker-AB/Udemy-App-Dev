@@ -25,28 +25,32 @@ public class StartersActivity extends AppCompatActivity {
                 5
         );
 
-        String[] dishes = {
-            "Spring Rolls",
-            "Garlic Bread",
-            "Brochette",
-            "Stuffed Mushrooms",
-            "Caresse Salad",
-            "Chicken Wings",
-            "Nachos",
-            "Hummus and Pita",
-            "Cheese Platter",
-            "Vegetable Samosas",
-            "Deviled Eggs",
-            "Onion Rings",
-            "Mini Quiches",
-            "Spinach and Artichoke Dip",
-            "Meatballs",
-            "Crispy Calamari",
-            "Potato Skins",
-            "Antipasto Skewers",
-            "Buffalo Cauliflower Bites",
-            "Brussels Sprouts with Bacon",
+        Dish[] dishes = {
+                
         };
+
+//        String[] dishes = {
+//            "Spring Rolls",
+//            "Garlic Bread",
+//            "Brochette",
+//            "Stuffed Mushrooms",
+//            "Caresse Salad",
+//            "Chicken Wings",
+//            "Nachos",
+//            "Hummus and Pita",
+//            "Cheese Platter",
+//            "Vegetable Samosas",
+//            "Deviled Eggs",
+//            "Onion Rings",
+//            "Mini Quiches",
+//            "Spinach and Artichoke Dip",
+//            "Meatballs",
+//            "Crispy Calamari",
+//            "Potato Skins",
+//            "Antipasto Skewers",
+//            "Buffalo Cauliflower Bites",
+//            "Brussels Sprouts with Bacon",
+//        };
 
         ArrayAdapter<String> dishesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dishes);
 
