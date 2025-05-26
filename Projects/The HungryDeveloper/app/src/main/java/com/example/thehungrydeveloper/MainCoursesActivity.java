@@ -34,6 +34,7 @@ public class MainCoursesActivity extends AppCompatActivity {
         };
 
         ArrayAdapter<Dish> dishesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mainCourses);
+        mainCoursesList.setAdapter(dishesAdapter);
 
     }
 }
