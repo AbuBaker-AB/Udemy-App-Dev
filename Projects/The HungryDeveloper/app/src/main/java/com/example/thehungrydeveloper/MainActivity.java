@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     CardView startersCard;
     CardView mainCourseCard;
+    CardView dessertsCard;
 
 
     @Override
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         startersCard = findViewById(R.id.cardview_starters);
         mainCourseCard = findViewById(R.id.cardview_main_course);
+        dessertsCard = findViewById(R.id.cardview_desserts);
 
         startersCard.setOnClickListener(new View.OnClickListener() {
             @Override
