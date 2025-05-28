@@ -72,11 +72,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Change Action Bar color
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.custom_primary, null));
-            getSupportActionBar().setElevation(8); // Set elevation
-        }
-
     }
 }
