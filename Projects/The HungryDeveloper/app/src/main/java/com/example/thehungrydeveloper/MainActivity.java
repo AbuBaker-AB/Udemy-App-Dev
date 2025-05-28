@@ -51,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        dessertsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent dessertsActivityIntent = new Intent(MainActivity.this, DessertsActivity.class);
+
+                startActivity(dessertsActivityIntent);
+
+            }
+        });
+
         TextView emailTextView = findViewById(R.id.textView_email);
         emailTextView.setOnClickListener(new View.OnClickListener() {
             @Override
