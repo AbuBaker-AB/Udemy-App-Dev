@@ -1,6 +1,17 @@
 package com.example.myappportfolio;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-public class Project extends AppCompatActivity {
+
+public class Project {
+
+    String projectName;
+    String projectDescription;
+    int projectImage;
+
+//    Project(String name, String description, int image) {
+//        this.projectName = name;
+//        this.projectDescription = description;
+//        this.projectImage = image;
+//    }
+    
 }
