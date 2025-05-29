@@ -8,10 +8,10 @@ public class Project {
     String projectDescription;
     int projectImage;
 
-//    Project(String name, String description, int image) {
-//        this.projectName = name;
-//        this.projectDescription = description;
-//        this.projectImage = image;
-//    }
-    
+    Project(String name, String description, int image) {
+        this.projectName = name;
+        this.projectDescription = description;
+        this.projectImage = image;
+    }
+
 }
