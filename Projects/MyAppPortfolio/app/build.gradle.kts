@@ -41,7 +41,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    
+
     // RecyclerView
     implementation(libs.recyclerview)
     //CardView
