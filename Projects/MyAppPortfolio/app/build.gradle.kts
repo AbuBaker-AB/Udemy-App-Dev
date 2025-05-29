@@ -40,4 +40,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    
+    // RecyclerView
+    implementation(libs.recyclerview)
+    //CardView
+    implementation(libs.cardview)
 }
