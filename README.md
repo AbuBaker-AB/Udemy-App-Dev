@@ -27,9 +27,14 @@ This repository contains source code and projects from Udemy App Development cou
 
 The following projects are included in this repository under the `Projects` directory:
 
-- [Inches Converter](https://github.com/AbuBaker-AB/Udemy-App-Dev/tree/main/Projects/Inches%20Converter)
-- [MyAppPortfolio](https://github.com/AbuBaker-AB/Udemy-App-Dev/tree/main/Projects/MyAppPortfolio)
-- [The HungryDeveloper](https://github.com/AbuBaker-AB/Udemy-App-Dev/tree/main/Projects/The%20HungryDeveloper)
+- [Inches Converter](https://github.com/AbuBaker-AB/Udemy-App-Dev/tree/main/Projects/Inches%20Converter)  
+  A simple utility app that converts inches to other measurement units. This project helps practice UI design and logic implementation in Android development.
+
+- [MyAppPortfolio](https://github.com/AbuBaker-AB/Udemy-App-Dev/tree/main/Projects/MyAppPortfolio)  
+  A portfolio app meant to showcase mini-apps or features you develop. This serves as a central hub for your Android app development practice. (Work in Progress)
+
+- [The Hungry Developer](https://github.com/AbuBaker-AB/Udemy-App-Dev/tree/main/Projects/The%20HungryDeveloper)  
+  An app themed around food or cooking, demonstrating features such as lists, images, and navigation in Android. It serves as a real-world example for learning app structure and implementation.
 
 Feel free to explore each project for specific implementations and examples.
 
