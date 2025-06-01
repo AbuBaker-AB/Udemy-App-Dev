@@ -13,5 +13,5 @@ public class Project {
         this.projectDescription = description;
         this.projectImage = image;
     }
-    
+
 }
