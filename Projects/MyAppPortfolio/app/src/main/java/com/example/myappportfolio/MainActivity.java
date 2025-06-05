@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
                 new Project("Super Duper Quiz", "A quiz app that tests your knowledge on various topics with multiple-choice questions.", R.drawable.quote),
                 new Project("Library App", "An app that helps users manage their book collections, including borrowing and returning books.", R.drawable.calculator),
                 new Project("Build It Bigger", "An app that provides users with construction challenges and allows them to build virtual structures.", R.drawable.tape),
-                new Project("Capstone Project", "A comprehensive project that showcases all the skills learned in the course.", R.drawable.hungry_developer)
+                new Project("Capstone Project", "A comprehensive project that showcases all the skills learned in the course.", R.drawable.hungry_developer),
+                new Project("My Portfolio", "A personal portfolio app that highlights my skills, projects, and achievements.", R.drawable.tape)
         };
     }
 }
