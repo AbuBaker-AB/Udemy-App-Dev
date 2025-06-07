@@ -3,6 +3,8 @@ package com.example.myappportfolio;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,13 +31,22 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
 
     @Override
     public void onBindViewHolder(@NonNull ProjectViewHolder holder, int position) {
-
+        holder.bind(projects[position]);
     }
 
     static class ProjectViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView appImage;
+        TextView appTitle;
+        TextView appDesc;
+
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
+            appImage = itemView.findViewById()
+        }
+
+        public void bind(Project project){
+
         }
     }
 }
