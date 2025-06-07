@@ -14,7 +14,8 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="12dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/quote" />
 
         <TextView
             android:id="@+id/text_view_project_title"
