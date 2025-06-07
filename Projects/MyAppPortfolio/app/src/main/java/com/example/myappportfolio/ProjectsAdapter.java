@@ -1,4 +1,13 @@
 package com.example.myappportfolio;
 
-public class ProjectsAdapter {
+import androidx.recyclerview.widget.RecyclerView;
+
+public class ProjectsAdapter extends RecyclerView.Adapter<> {
+
+
+
+
+
+
+    class
 }
