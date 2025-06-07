@@ -32,6 +32,8 @@
             android:id="@+id/text_view_project_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#222222"
             android:layout_alignTop="@id/card_view_project_icon_container"
             android:layout_toEndOf="@+id/card_view_project_icon_container"
             android:text="The App Title" />
