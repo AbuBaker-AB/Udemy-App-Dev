@@ -48,7 +48,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
         }
 
         public void bind(Project project){
-
+            appTitle.setText(project.projectName);
+            appDesc.setText(project.projectDescription);
+            appImage.setImageResource(project.projectImage);
         }
     }
 }
