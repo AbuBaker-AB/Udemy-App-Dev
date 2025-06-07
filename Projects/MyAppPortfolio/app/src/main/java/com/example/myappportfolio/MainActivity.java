@@ -30,5 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 new Project("Build It Bigger", "An app that provides users with construction challenges and allows them to build virtual structures.", R.drawable.tape),
                 new Project("Capstone Project", "A comprehensive project that showcases all the skills learned in the course.", R.drawable.hungry_developer)
         };
+
+        ProjectsAdapter adapter = new ProjectsAdapter(projects);
+        list.setAdapter(adapter);
     }
 }
