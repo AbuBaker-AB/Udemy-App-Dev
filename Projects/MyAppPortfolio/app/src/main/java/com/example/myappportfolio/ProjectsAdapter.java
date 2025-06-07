@@ -1,5 +1,6 @@
 package com.example.myappportfolio;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,10 +23,8 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
     @NonNull
     @Override
     public ProjectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        
-
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_project, parent, false);
+        return new ProjectViewHolder(view);
     }
 
     @Override
