@@ -35,9 +35,9 @@
             android:layout_alignTop="@id/card_view_project_icon_container"
             android:layout_toEndOf="@+id/card_view_project_icon_container"
             android:fontFamily="sans-serif-medium"
-            android:text="The App Title"
             android:textColor="#222222"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="The App Title" />
 
         <TextView
             android:id="@+id/text_view_project_description"
@@ -48,9 +48,9 @@
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@id/card_view_project_icon_container"
             android:fontFamily="sans-serif-light"
-            android:text="The App Description"
             android:textColor="#888888"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="The App Description" />
 
     </RelativeLayout>
 
