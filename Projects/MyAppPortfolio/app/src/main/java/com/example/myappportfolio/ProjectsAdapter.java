@@ -42,7 +42,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
 
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
-            appImage = itemView.findViewById()
+            appImage = itemView.findViewById(R.id.image_view_project_icon);
+            appTitle = itemView.findViewById(R.id.text_view_project_title);
+            appDesc = itemView.findViewById(R.id.text_view_project_description);
         }
 
         public void bind(Project project){
