@@ -36,9 +36,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
 
     static class ProjectViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView appImage;
-        TextView appTitle;
-        TextView appDesc;
+        private final ImageView appImage;
+        private final TextView appTitle;
+        private final TextView appDesc;
 
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
