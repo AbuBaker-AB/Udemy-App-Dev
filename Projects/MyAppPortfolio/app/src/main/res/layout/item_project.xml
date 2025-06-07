@@ -32,11 +32,12 @@
             android:id="@+id/text_view_project_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="#222222"
             android:layout_alignTop="@id/card_view_project_icon_container"
             android:layout_toEndOf="@+id/card_view_project_icon_container"
-            android:text="The App Title" />
+            android:fontFamily="sans-serif-medium"
+            android:text="The App Title"
+            android:textColor="#222222"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/text_view_project_description"
@@ -46,7 +47,10 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@id/card_view_project_icon_container"
-            android:text="The App Description" />
+            android:fontFamily="sans-serif-light"
+            android:text="The App Description"
+            android:textColor="#888888"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
