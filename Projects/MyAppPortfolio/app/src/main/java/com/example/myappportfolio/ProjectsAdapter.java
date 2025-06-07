@@ -32,8 +32,6 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
 
     }
 
-
-
     static class ProjectViewHolder extends RecyclerView.ViewHolder {
 
         public ProjectViewHolder(@NonNull View itemView) {
