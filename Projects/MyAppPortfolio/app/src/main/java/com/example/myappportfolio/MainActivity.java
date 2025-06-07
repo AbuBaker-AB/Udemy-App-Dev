@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView list = findViewById(R.id.recyclerView_projects);
 
-        Project project1 = new Project(
-                "Spotify Streamer",
-                "A music streaming app that allows users to search for artists, albums, and tracks.",
-                5);
+//        Project project1 = new Project(
+//                "Spotify Streamer",
+//                "A music streaming app that allows users to search for artists, albums, and tracks.",
+//                5);
 
         Project[] projects = {
                 new Project("Spotify Streamer", "A music streaming app that allows users to search for artists, albums, and tracks.", R.drawable.getting_started),
