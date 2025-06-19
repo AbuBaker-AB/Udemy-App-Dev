@@ -11,6 +11,7 @@
     android:paddingBottom="12dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_things_to_do"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="24dp"
@@ -41,6 +42,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_places_to_go"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="24dp"
