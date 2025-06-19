@@ -6,4 +6,5 @@ public class BucketListEntry {
     String description;
     int image;
     float decimalValue;
+    
 }
