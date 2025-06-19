@@ -50,7 +50,11 @@ public class BucketListEntryAdapter extends RecyclerView.Adapter<BucketListEntry
             ratingBar = itemView.findViewById(R.id.rating_bar_item_rating);
         }
         public void bind(BucketListEntry entry, int position) {
-
+            image.setImageResource(entry.image);
+            String headerString = position + 1 + ". " + entry.heading;
+            headerText.setText(entry.heading);
+            descriptionText.setText(entry.description);
+            ratingBar.setRating(entry.rating);
         }
 
     }
