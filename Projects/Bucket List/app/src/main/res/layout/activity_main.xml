@@ -20,6 +20,12 @@
             android:scaleType="centerCrop"
             android:src="@drawable/scubadive" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Things to do"
+            android:textColor="FFFFFF"/>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
