@@ -8,6 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class BucketListEntryAdapter extends RecyclerView.Adapter<BucketListEntryAdapter.BucketListViewHolder> {
 
+    BucketListEntry[] entries;
+
+    public BucketListEntryAdapter(BucketListEntry[] entries) {
+        this.entries = entries;
+    }
+
     @NonNull
     @Override
     public BucketListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
