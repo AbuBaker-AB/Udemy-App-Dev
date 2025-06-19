@@ -27,7 +27,7 @@
         android:fontFamily="sans-serif-light"
         android:textColor="#777777"
         android:textSize="14sp"
-        tools:text="This is a description of the item. It can be longer than the heading. I want to see what it looks like on  multiple lines." />
+        tools:text="This is a description of the item. I want to see what it looks like on multiple lines." />
 
     <RatingBar
         android:id="@+id/rating_bar_item_rating"
