@@ -27,7 +27,7 @@ public class BucketListEntryAdapter extends RecyclerView.Adapter<BucketListEntry
 
     @Override
     public void onBindViewHolder(@NonNull BucketListViewHolder holder, int position) {
-
+        holder.bind(entries[position], position);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class BucketListEntryAdapter extends RecyclerView.Adapter<BucketListEntry
         public void bind(BucketListEntry entry, int position) {
             image.setImageResource(entry.image);
             String headerString = position + 1 + ". " + entry.heading;
-            headerText.setText(entry.heading);
+            headerText.setText(headerString);
             descriptionText.setText(entry.description);
             ratingBar.setRating(entry.rating);
         }
