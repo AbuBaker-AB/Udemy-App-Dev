@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ThingsToDoActivity extends AppCompatActivity {
 
@@ -31,5 +32,9 @@ public class ThingsToDoActivity extends AppCompatActivity {
                 new BucketListEntry("Hot Air Balloon Ride in Cappadocia", "Soar over unique landscapes", R.drawable.vietnam, 4.7f),
                 new BucketListEntry("Explore the Northern Lights in Iceland", "A magical natural phenomenon", R.drawable.kerala, 4.9f)
         };
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_things_to_do);
+        BucketListEntryAdapter adapter = new BucketListEntryAdapter(thingsDo);
+        recyclerView.setAdapter(adapter);
     }
 }
