@@ -19,6 +19,8 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ThingsToDoActivity"
+            android:label="Things To Do"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
