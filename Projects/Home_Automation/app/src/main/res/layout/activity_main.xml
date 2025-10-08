@@ -313,7 +313,7 @@
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_marginEnd="16dp"
-                            android:src="@drawable/ceiling"/>
+                            android:src="@drawable/air_conditioner"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -355,7 +355,7 @@
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_marginEnd="16dp"
-                            android:src="@drawable/ceiling"/>
+                            android:src="@drawable/extractor"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -436,11 +436,11 @@
                         android:gravity="center_vertical"
                         android:padding="20dp">
 
-                        <View
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:background="#FF9800"
-                            android:layout_marginEnd="16dp" />
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/light_bulb"/>
 
                         <TextView
                             android:layout_width="0dp"
