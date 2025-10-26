@@ -1,5 +1,6 @@
 package com.example.home_automation.database
 
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -10,7 +11,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [Device::class, SensorData::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class HomeAutomationDatabase : RoomDatabase() {
@@ -31,20 +32,8 @@ abstract class HomeAutomationDatabase : RoomDatabase() {
             }
         }
 
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
-            INSTANCE?.let { database ->
-                scope.launch {
-                    ensureDevicesExist(database.deviceDao())
-                }
-            }
-        }
-
         suspend fun populateDatabase(deviceDao: DeviceDao) {
-            // Delete all content here.
-            deviceDao.deleteAllDevices()
-
-            // Add sample devices
+            // Add sample devices on first install
             var device = Device("fan1", "Living Room Fan", "fan", false)
             deviceDao.insertDevice(device)
 
@@ -56,21 +45,8 @@ abstract class HomeAutomationDatabase : RoomDatabase() {
 
             device = Device("light1", "Main Light", "light", false)
             deviceDao.insertDevice(device)
-        }
 
-        suspend fun ensureDevicesExist(deviceDao: DeviceDao) {
-            // Check and insert devices if they don't exist
-            val deviceIds = listOf("fan1", "fan2", "fan3", "light1")
-            val deviceNames = listOf("Living Room Fan", "Bedroom Fan", "Kitchen Fan", "Main Light")
-            val deviceTypes = listOf("fan", "fan", "fan", "light")
-
-            for (i in deviceIds.indices) {
-                val existingDevice = deviceDao.getDevice(deviceIds[i])
-                if (existingDevice == null) {
-                    val device = Device(deviceIds[i], deviceNames[i], deviceTypes[i], false)
-                    deviceDao.insertDevice(device)
-                }
-            }
+            println("Database: Initial devices inserted successfully")
         }
     }
 
@@ -88,6 +64,7 @@ abstract class HomeAutomationDatabase : RoomDatabase() {
                     HomeAutomationDatabase::class.java,
                     "home_automation_database"
                 )
+                .fallbackToDestructiveMigration() // This will recreate the database if schema changes
                 .addCallback(HomeAutomationDatabaseCallback(scope))
                 .build()
                 INSTANCE = instance
