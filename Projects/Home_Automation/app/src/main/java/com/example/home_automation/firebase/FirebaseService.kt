@@ -2,7 +2,6 @@ package com.example.home_automation.firebase
 
 import com.google.firebase.database.*
 import com.example.home_automation.database.SensorData
-import com.example.home_automation.viewmodel.SensorViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,8 +17,6 @@ class FirebaseService private constructor() {
     private var valueEventListener: ValueEventListener? = null
     private var deviceStateListener: ValueEventListener? = null
 
-    // Add SensorViewModel for saving to Room database
-    private var sensorViewModel: SensorViewModel? = null
 
     companion object {
         @Volatile
@@ -39,17 +36,14 @@ class FirebaseService private constructor() {
                 // Use custom database URL if provided
                 FirebaseDatabase.getInstance(databaseUrl)
             }
-            // Enable offline persistence
+            // Enable offline persistence (must be called before any other database usage)
+            // Note: calling this after initialization will throw; we catch to avoid crash.
             database.setPersistenceEnabled(true)
         } catch (e: Exception) {
             println("Firebase: Database already initialized or error: ${e.message}")
         }
     }
 
-    // Set SensorViewModel for saving data to Room
-    fun setSensorViewModel(viewModel: SensorViewModel) {
-        this.sensorViewModel = viewModel
-    }
 
     // Update device state in Firebase
     fun updateDeviceState(deviceId: String, isOn: Boolean) {
@@ -112,31 +106,19 @@ class FirebaseService private constructor() {
                         else -> false
                     }
 
-                    val timestamp = snapshot.child("timestamp").getValue(Long::class.java) ?: System.currentTimeMillis()
+                    val timestamp = snapshot.child("timestamp").getValue(Long::class.java)
+                        ?: System.currentTimeMillis()
 
                     val sensorData = SensorData(
-                        id = 0, // Room database will auto-generate
+                        id = 0, // Room database will auto-generate if you persist it
                         temperature = temperature,
                         humidity = humidity,
                         motionDetected = motion,
                         timestamp = timestamp
                     )
 
-                    // Save to Room database
-                    sensorViewModel?.let { viewModel ->
-                        CoroutineScope(Dispatchers.IO).launch {
-                            try {
-                                viewModel.insertSensorData(sensorData)
-                                println("Firebase: Sensor data saved to Room database")
-                            } catch (e: Exception) {
-                                println("Firebase Error: Failed to save sensor data to Room - ${e.message}")
-                            }
-                        }
-                    }
-
-                    // Callback to UI
-                    onDataReceived(sensorData)
-                    println("Firebase: Received sensor data - Temp: ${temperature}°C, Humidity: ${humidity}%, Motion: $motion")
+                    // Deliver to callback
+                    sensorDataListener?.invoke(sensorData)
                 } catch (e: Exception) {
                     println("Firebase Error: Failed to parse sensor data - ${e.message}")
                     e.printStackTrace()
@@ -161,7 +143,7 @@ class FirebaseService private constructor() {
     }
 
     // Listen for device state changes from Firebase
-    fun listenForDeviceStates(onDeviceStateChanged: (String, Boolean) -> Unit) {
+    fun listenForDeviceStates(onDeviceStateChanged: (String, Boolean, Long) -> Unit) {
         deviceStateListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
@@ -169,7 +151,8 @@ class FirebaseService private constructor() {
                         val deviceId = deviceSnapshot.key ?: continue
                         val status = deviceSnapshot.child("status").getValue(String::class.java) ?: "off"
                         val isOn = status.lowercase() == "on"
-                        onDeviceStateChanged(deviceId, isOn)
+                        val ts = deviceSnapshot.child("timestamp").getValue(Long::class.java) ?: 0L
+                        onDeviceStateChanged(deviceId, isOn, ts)
                     }
                 } catch (e: Exception) {
                     println("Firebase Error: Failed to parse device states - ${e.message}")
@@ -196,6 +179,5 @@ class FirebaseService private constructor() {
     fun cleanup() {
         stopListeningForSensorData()
         stopListeningForDeviceStates()
-        sensorViewModel = null
     }
 }
