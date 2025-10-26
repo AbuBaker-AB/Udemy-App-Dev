@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.home_automation.HomeAutomationApplication
 import com.example.home_automation.database.Device
-import com.example.home_automation.database.HomeAutomationDatabase
 import com.example.home_automation.repository.DeviceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,18 +16,15 @@ class DeviceViewModel(application: Application) : AndroidViewModel(application) 
     val allDevices: LiveData<List<Device>>
 
     init {
-        val deviceDao = HomeAutomationDatabase.getDatabase(application, viewModelScope).deviceDao()
-        repository = DeviceRepository(deviceDao)
+        val app = application as HomeAutomationApplication
+        repository = app.repository
         allDevices = repository.allDevices
-
-        // Initialize Firebase with default devices
-        repository.initializeFirebase()
     }
 
-    fun updateDeviceState(deviceId: String, isOn: Boolean) = viewModelScope.launch(Dispatchers.IO) {
+    fun updateDeviceState(deviceId: String, isOn: Boolean, pushToFirebase: Boolean = true) = viewModelScope.launch(Dispatchers.IO) {
         try {
-            repository.updateDeviceState(deviceId, isOn)
-            println("DeviceViewModel: Successfully updated $deviceId to ${if (isOn) "ON" else "OFF"}")
+            repository.updateDeviceState(deviceId, isOn, pushToFirebase)
+            println("DeviceViewModel: Successfully updated $deviceId to ${if (isOn) "ON" else "OFF"} (pushToFirebase=$pushToFirebase)")
         } catch (e: Exception) {
             println("DeviceViewModel: Error updating $deviceId: ${e.message}")
         }
