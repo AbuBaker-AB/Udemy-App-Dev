@@ -15,6 +15,7 @@ import com.example.home_automation.viewmodel.DeviceViewModel
 import com.example.home_automation.database.Device
 import com.example.home_automation.database.SensorData
 import com.example.home_automation.firebase.FirebaseService
+import java.util.concurrent.ConcurrentHashMap
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity() {
 
     // Flag to prevent recursive updates
     private var isUpdatingFromDatabase = false
+
+    // Track latest local update times to avoid echo from Firebase
+    private val localUpdateTimestamps = ConcurrentHashMap<String, Long>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,18 +81,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeViewModel() {
         deviceViewModel = ViewModelProvider(this)[DeviceViewModel::class.java]
-
-        // Initialize devices synchronously using Room's INSERT OR REPLACE strategy
-        initializeDevicesInDatabase()
-    }
-
-    private fun initializeDevicesInDatabase() {
-        // Use INSERT OR REPLACE to ensure devices always exist
-        // This will create devices if they don't exist, or keep existing ones if they do
-        deviceViewModel.insertDevice(Device("fan1", "Living Room Fan", "fan", false))
-        deviceViewModel.insertDevice(Device("fan2", "Bedroom Fan", "fan", false))
-        deviceViewModel.insertDevice(Device("fan3", "Kitchen Fan", "fan", false))
-        deviceViewModel.insertDevice(Device("light1", "Main Light", "light", false))
     }
 
     private fun observeDeviceStates() {
@@ -115,53 +107,57 @@ class MainActivity : AppCompatActivity() {
         // Fan 1 control
         switchFan1.setOnCheckedChangeListener { _, isChecked ->
             if (!isUpdatingFromDatabase) {
+                val now = System.currentTimeMillis()
+                localUpdateTimestamps["fan1"] = now
                 updateDeviceInDatabase("fan1", isChecked)
-                updateDeviceInFirebase("fan1", isChecked)
                 val status = if (isChecked) "ON" else "OFF"
-                showToast("🌀 Living Room Fan turned $status")
+                showToast("\uD83C\uDF00 Living Room Fan turned $status")
             }
         }
 
         // Fan 2 control
         switchFan2.setOnCheckedChangeListener { _, isChecked ->
             if (!isUpdatingFromDatabase) {
+                val now = System.currentTimeMillis()
+                localUpdateTimestamps["fan2"] = now
                 updateDeviceInDatabase("fan2", isChecked)
-                updateDeviceInFirebase("fan2", isChecked)
                 val status = if (isChecked) "ON" else "OFF"
-                showToast("🌀 Bedroom Fan turned $status")
+                showToast("\uD83C\uDF00 Bedroom Fan turned $status")
             }
         }
 
         // Fan 3 control
         switchFan3.setOnCheckedChangeListener { _, isChecked ->
             if (!isUpdatingFromDatabase) {
+                val now = System.currentTimeMillis()
+                localUpdateTimestamps["fan3"] = now
                 updateDeviceInDatabase("fan3", isChecked)
-                updateDeviceInFirebase("fan3", isChecked)
                 val status = if (isChecked) "ON" else "OFF"
-                showToast("🌀 Kitchen Fan turned $status")
+                showToast("\uD83C\uDF00 Kitchen Fan turned $status")
             }
         }
 
         // Light control
         switchLight.setOnCheckedChangeListener { _, isChecked ->
             if (!isUpdatingFromDatabase) {
+                val now = System.currentTimeMillis()
+                localUpdateTimestamps["light1"] = now
                 updateDeviceInDatabase("light1", isChecked)
-                updateDeviceInFirebase("light1", isChecked)
                 val status = if (isChecked) "ON" else "OFF"
-                showToast("💡 Main Light turned $status")
+                showToast("\uD83D\uDCA1 Main Light turned $status")
             }
         }
 
         // All ON button
         btnAllOn.setOnClickListener {
             updateAllDevices(true)
-            showToast("✅ All devices turned ON")
+            showToast("\u2705 All devices turned ON")
         }
 
         // All OFF button
         btnAllOff.setOnClickListener {
             updateAllDevices(false)
-            showToast("❌ All devices turned OFF")
+            showToast("\u274C All devices turned OFF")
         }
     }
 
@@ -170,11 +166,6 @@ class MainActivity : AppCompatActivity() {
         updateDeviceInDatabase("fan2", isOn)
         updateDeviceInDatabase("fan3", isOn)
         updateDeviceInDatabase("light1", isOn)
-
-        updateDeviceInFirebase("fan1", isOn)
-        updateDeviceInFirebase("fan2", isOn)
-        updateDeviceInFirebase("fan3", isOn)
-        updateDeviceInFirebase("light1", isOn)
     }
 
     private fun updateDeviceInDatabase(deviceId: String, isOn: Boolean) {
@@ -183,10 +174,6 @@ class MainActivity : AppCompatActivity() {
         // Log the database update for debugging
         val status = if (isOn) "ON" else "OFF"
         println("Database Updated: Device $deviceId is now $status at ${System.currentTimeMillis()}")
-    }
-
-    private fun updateDeviceInFirebase(deviceId: String, isOn: Boolean) {
-        firebaseService.updateDeviceState(deviceId, isOn)
     }
 
     private fun setupFirebaseListeners() {
@@ -198,21 +185,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Listen for device state changes from Firebase (for synchronization)
-        firebaseService.listenForDeviceStates { deviceId, isOn ->
+        firebaseService.listenForDeviceStates { deviceId, isOn, remoteTs ->
+            // If we recently initiated this change locally, ignore the echo
+            val localTs = localUpdateTimestamps[deviceId] ?: 0L
+            val isEcho = remoteTs != 0L && (remoteTs - localTs) in -1500..1500
+            if (isEcho) {
+                println("MainActivity: Ignoring echo for $deviceId (remoteTs=$remoteTs, localTs=$localTs)")
+                return@listenForDeviceStates
+            }
             runOnUiThread {
-                updateDeviceInDatabase(deviceId, isOn)
+                // Update local DB without pushing back to Firebase to avoid loops
+                deviceViewModel.updateDeviceState(deviceId, isOn, pushToFirebase = false)
             }
         }
     }
 
     private fun updateSensorUI(sensorData: SensorData) {
         // Update UI with real sensor data from Firebase
-        tvTemperature.text = "${sensorData.temperature.toInt()}°C"
+        tvTemperature.text = "${sensorData.temperature.toInt()}\u00B0C"
         tvHumidity.text = "${sensorData.humidity.toInt()}%"
         tvMotionStatus.text = if (sensorData.motionDetected) "Detected" else "Clear"
 
         // Log for debugging
-        println("UI Updated with Firebase sensor data: Temp=${sensorData.temperature}°C, Humidity=${sensorData.humidity}%, Motion=${sensorData.motionDetected}")
+        println("UI Updated with Firebase sensor data: Temp=${sensorData.temperature}\u00B0C, Humidity=${sensorData.humidity}%, Motion=${sensorData.motionDetected}")
     }
 
     private fun showToast(message: String) {
@@ -223,5 +218,6 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         // Clean up Firebase listeners
         firebaseService.stopListeningForSensorData()
+        firebaseService.stopListeningForDeviceStates()
     }
 }
