@@ -24,12 +24,16 @@ class DeviceRepository(private val deviceDao: DeviceDao) {
         firebaseService.updateDeviceState(device.id, device.isOn)
     }
 
-    suspend fun updateDeviceState(deviceId: String, isOn: Boolean) {
+    suspend fun updateDeviceState(deviceId: String, isOn: Boolean, pushToFirebase: Boolean = true) {
         println("Repository: Updating device state - $deviceId to ${if (isOn) "ON" else "OFF"}")
         deviceDao.updateDeviceState(deviceId, isOn, System.currentTimeMillis())
-        // Sync state to Firebase
-        firebaseService.updateDeviceState(deviceId, isOn)
-        println("Repository: Device state update completed for $deviceId and synced to Firebase")
+        if (pushToFirebase) {
+            // Sync state to Firebase
+            firebaseService.updateDeviceState(deviceId, isOn)
+            println("Repository: Device state update completed for $deviceId and synced to Firebase")
+        } else {
+            println("Repository: Device state update completed for $deviceId (local only, no Firebase sync)")
+        }
     }
 
     suspend fun getDevice(deviceId: String): Device? {
@@ -43,7 +47,7 @@ class DeviceRepository(private val deviceDao: DeviceDao) {
     // Initialize Firebase service
     fun initializeFirebase() {
         firebaseService.initialize()
-        // Initialize with test sensor data if needed
-        firebaseService.updateSensorData(22, 45, false)
+        // Removed test sensor data write to avoid mixing with real sensor updates from ESP
+        // If you need to seed once for UI, do it manually in a debug-only path.
     }
 }
