@@ -1,6 +1,7 @@
 package com.example.shamelessself_promoapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Spinner
@@ -25,8 +26,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        contactNameEditText = findViewById(R.id.contactNameEt)
-        contactNumberEditText = findViewById(R.id.contactNumber)
+//        contactNameEditText = findViewById(R.id.contactNameEt)
+//        contactNumberEditText = findViewById(R.id.contactNumber)
         displayNameEditText = findViewById(R.id.myDisplayName)
         messageEditText = findViewById(R.id.messageEt)
         juniorCheckBox = findViewById(R.id.juniorCheckBox)
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onPreviewClicked() {
-
         val testString = contactNameEditText?.text.toString() + ", " + contactNumberEditText?.text.toString()
         Toast.makeText(this, testString, Toast.LENGTH_LONG).show()
     }
