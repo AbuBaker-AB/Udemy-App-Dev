@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        
+
         previewButton.setOnClickListener {
             // Handle preview button click
             onPreviewClicked()
